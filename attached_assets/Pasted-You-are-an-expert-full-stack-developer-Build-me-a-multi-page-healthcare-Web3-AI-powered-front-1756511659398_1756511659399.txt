@@ -1,0 +1,70 @@
+You are an expert full-stack developer.  
+Build me a **multi-page healthcare Web3 + AI powered frontend application** called **MediLinkX** with the title:  
+“Decentralized Health Identity & Smart Benefits Platform”.  
+
+🖌️ **Color Palette (must be used consistently):**  
+- Blue (#007BFF): Trust, calmness, credibility (primary buttons, headers)  
+- Green (#28A745): Healing, confirmation states, eligibility indicators  
+- White (#FFFFFF): Backgrounds, cards, simplicity  
+- Orange (#FF8800): Medium importance alerts, secondary actions  
+- Red (#DC3545): Critical alerts, rejection/error states  
+
+📑 **Application Structure (Multi-Page, not SPA):**  
+1. **Landing Page (Home)**  
+   - Hero section with logo, project title, tagline.  
+   - Call-to-action: “Create Your HealthID”.  
+   - Info cards explaining: HealthID (Web3), AI Recommendations, Scheme Auto-Apply, Secure Vouchers.  
+   - Footer with navigation links.  
+
+2. **HealthID Creation Page**  
+   - Form: Patient Name, DOB, Aadhaar/Other ID, Basic Medical Info.  
+   - On submit → Generate a mock HealthID (unique hash-like ID).  
+   - Display HealthID with a styled card + copy button.  
+
+3. **AI Recommendation Page**  
+   - Section: Enter HealthID → Fetch dummy patient profile.  
+   - Show AI-generated mock recommendations of eligible schemes.  
+   - Use Blue + Green for eligibility status badges.  
+
+4. **Scheme Application Page**  
+   - List recommended schemes.  
+   - Each scheme has “Auto-Apply” button → show mock success state.  
+   - Confirmation modal styled in White + Green.  
+
+5. **Wallet & Vouchers Page (Critical Flow)**  
+   - Coinbase/CDP Wallet mock integration.  
+   - Show patient balance in crypto stablecoins (USDC mock).  
+   - Display available vouchers (example: “Kidney Care Scheme: $200 Voucher”).  
+   - On “Claim & Pay to Hospital” → simulate payment flow:  
+     ✅ Show real-time popup notification:  
+     “$200 voucher successfully transferred to Apollo Hospital. Transaction ID: TXN12345. Funds received.”  
+   - Update wallet balance after transaction.  
+
+6. **Completion & PDF Generation Page**  
+   - After successful payment, generate a **PDF receipt** with:  
+     • Patient HealthID  
+     • Hospital Name  
+     • Scheme Availed  
+     • Voucher Amount + Transaction ID  
+     • AI Agent Recommendation Summary  
+     • Final Status = ✅ Completed  
+   - Provide a “Download PDF Receipt” button.  
+
+7. **About / Info Page**  
+   - Project vision, transparency, fraud-proof Web3, AI-powered automation.  
+   - Team/contact section.  
+
+🖼️ **UI Style Guidelines:**  
+- Modern, professional, healthcare-themed UI with **glassmorphism elements**.  
+- Rounded corners, soft shadows, clean spacing.  
+- Use animations (fade-in, slide-up) for page transitions.  
+- Consistent navbar with links: Home | Create HealthID | AI Recommendation | Schemes | Wallet | Receipt | About.  
+
+📌 **Technical Notes:**  
+- Generate pages as React components with clean routing (multi-page).  
+- Use TailwindCSS for styling.  
+- Use mock/dummy data for AI outputs, wallet balances, schemes, and hospitals.  
+- Use a library (like jsPDF) to generate PDF receipts.  
+- Must be demo-ready with good **visual appeal + interactivity**.  
+
+Deliver the **full frontend codebase** with proper routing, multi-page structure, styled components, wallet flow, and PDF export.
