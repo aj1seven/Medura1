@@ -1,15 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Heart, Shield, Users, Zap, CheckCircle, ArrowRight, DollarSign, Clock, Building } from "lucide-react";
+import { Heart, Shield, Users, Zap, CheckCircle, ArrowRight, DollarSign, Clock, Building, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { mockSchemes } from "@/lib/storage";
 
+interface Scheme {
+  id: string;
+  name: string;
+  description: string;
+  coverage: number;
+  processingTime: string;
+  networkHospitals: number;
+  matchPercentage: number;
+  type: 'diabetes-care' | 'general-health' | 'family-care' | 'emergency-care';
+}
+
 export default function Schemes() {
+  const [schemes, setSchemes] = useState<Scheme[]>([]);
   const [appliedSchemes, setAppliedSchemes] = useState<Set<string>>(new Set());
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+
+  useEffect(() => {
+    fetchSchemes();
+  }, []);
+
+  const fetchSchemes = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Use mock data instead of API call
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate loading
+      
+      // Add some additional mock schemes
+      const additionalSchemes: Scheme[] = [
+        {
+          id: 'emergency-care',
+          name: 'Emergency Care Plus',
+          description: '24/7 emergency medical coverage with ambulance services and critical care support',
+          coverage: 10000,
+          processingTime: 'Immediate',
+          networkHospitals: 1200,
+          matchPercentage: 85,
+          type: 'emergency-care'
+        }
+      ];
+      
+      const allSchemes = [...mockSchemes, ...additionalSchemes];
+      setSchemes(allSchemes);
+    } catch (error) {
+      console.error('Error fetching schemes:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load health schemes. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleAutoApply = (schemeId: string, schemeName: string) => {
     // Simulate application process
@@ -60,10 +112,10 @@ export default function Schemes() {
     };
   };
 
-  const getMatchLabel = (percentage: number) => {
-    if (percentage >= 90) return "Highly Recommended";
-    if (percentage >= 80) return "Recommended";
-    return "Good Option";
+  const getMatchBadgeColor = (percentage: number) => {
+    if (percentage >= 90) return "bg-medilinkx-green";
+    if (percentage >= 80) return "bg-medilinkx-blue";
+    return "bg-medilinkx-orange";
   };
 
   return (
@@ -75,8 +127,14 @@ export default function Schemes() {
             <p className="text-xl text-gray-600">Apply to eligible health schemes with our smart auto-apply feature</p>
           </div>
 
-          <div className="space-y-6">
-            {mockSchemes.map((scheme) => {
+          {isLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+              <span className="ml-2 text-gray-600">Loading schemes...</span>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {schemes.map((scheme) => {
               const SchemeIcon = getSchemeIcon(scheme.type);
               const colors = getMatchColor(scheme.matchPercentage);
               const isApplied = appliedSchemes.has(scheme.id);
@@ -92,9 +150,9 @@ export default function Schemes() {
                           </div>
                           <div>
                             <h3 className="text-2xl font-bold text-gray-800">{scheme.name}</h3>
-                            <span className={`${colors.bg} text-white px-3 py-1 rounded-full text-sm font-semibold`}>
-                              {scheme.matchPercentage}% Match - {getMatchLabel(scheme.matchPercentage)}
-                            </span>
+                                                          <span className={`${colors.bg} text-white px-3 py-1 rounded-full text-sm font-semibold`}>
+                                {scheme.matchPercentage}% Match
+                              </span>
                           </div>
                         </div>
                         <p className="text-gray-600 mb-4">{scheme.description}</p>
@@ -141,7 +199,8 @@ export default function Schemes() {
                 </Card>
               );
             })}
-          </div>
+            </div>
+          )}
 
           {/* Application Status */}
           {showSuccess && (

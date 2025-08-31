@@ -327,6 +327,10 @@
   50% { transform: translateY(-10px); }
 }
 
+.animate-float {
+  animation: floating 3s ease-in-out infinite;
+}
+
 @keyframes pulseGlow {
   0%, 100% { box-shadow: 0 0 20px rgba(0, 123, 255, 0.3); }
   50% { box-shadow: 0 0 40px rgba(0, 123, 255, 0.6); }
@@ -344,4 +348,16 @@
   right: 20px;
   z-index: 1000;
   animation: slideInRight 0.5s ease-out;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }

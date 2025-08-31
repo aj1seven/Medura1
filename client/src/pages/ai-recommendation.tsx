@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Search, Brain, UserCheck, Heart, Shield, Users, ArrowRight } from "lucide-react";
+import { Search, Brain, UserCheck, Heart, Shield, Users, ArrowRight, CheckCircle, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,32 +12,30 @@ export default function AiRecommendation() {
   const [showProfile, setShowProfile] = useState(false);
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [patientProfile, setPatientProfile] = useState<any>(null);
+  const [autoAppliedSchemes, setAutoAppliedSchemes] = useState<Set<string>>(new Set());
   const { toast } = useToast();
 
   const handleAnalyze = () => {
     if (!healthIdInput.trim()) {
       toast({
         title: "Error",
-        description: "Please enter a valid HealthID",
+        description: "Please enter a valid ABHA ID",
         variant: "destructive",
       });
       return;
     }
 
-    // Try to get the stored health ID or use mock data
-    let profile = LocalStorage.getHealthId();
-    
-    if (!profile) {
-      // Create mock profile for demo
-      profile = {
-        id: healthIdInput,
-        patientName: "John Doe",
-        dateOfBirth: "1988-05-15",
-        bloodGroup: "A+",
-        medicalConditions: "Diabetes Type 2",
-        emergencyContact: "+1-555-0123",
-      };
-    }
+    // Create mock profile for demo
+    const profile = {
+      id: healthIdInput,
+      patientName: "John Doe",
+      dateOfBirth: "1988-05-15",
+      nationalId: "NID123456",
+      bloodGroup: "A+",
+      medicalConditions: "Diabetes Type 2, Hypertension",
+      emergencyContact: "+1-555-0123",
+      createdAt: new Date(),
+    };
 
     setPatientProfile(profile);
     setShowProfile(true);
@@ -50,6 +48,70 @@ export default function AiRecommendation() {
         description: "Your personalized recommendations are ready!",
       });
     }, 1500);
+  };
+
+  const handleAutoApply = (schemeId: string, schemeName: string) => {
+    // Add to auto-applied schemes
+    setAutoAppliedSchemes(prev => new Set([...prev, schemeId]));
+    
+    // Store auto-applied schemes in localStorage for the claim-schemes page
+    const currentApplied = Array.from(autoAppliedSchemes);
+    const updatedApplied = [...currentApplied, schemeId];
+    localStorage.setItem('auto_applied_schemes', JSON.stringify(updatedApplied));
+    
+    // Store the scheme details for immediate access in voucher wallet
+    const schemeDetails = mockSchemes.find(scheme => scheme.id === schemeId);
+    if (schemeDetails) {
+      const approvedScheme = {
+        id: schemeDetails.id,
+        name: schemeDetails.name,
+        description: schemeDetails.description,
+        amount: schemeDetails.coverage / 100, // Convert to USDC (divide by 100 for demo)
+        status: 'approved' as const,
+        approvalDate: new Date().toISOString().split('T')[0],
+        provider: 'Government Health Scheme',
+        estimatedBenefit: `$${schemeDetails.coverage.toLocaleString()}`,
+        matchScore: schemeDetails.matchPercentage
+      };
+      
+      const existingApproved = JSON.parse(localStorage.getItem('approved_schemes') || '[]');
+      const updatedApproved = [...existingApproved, approvedScheme];
+      localStorage.setItem('approved_schemes', JSON.stringify(updatedApproved));
+    }
+    
+    toast({
+      title: "Auto-Application Successful!",
+      description: `Successfully applied to ${schemeName}`,
+    });
+  };
+
+  const handleAutoApplyAll = () => {
+    // Auto-apply to all schemes
+    const allSchemeIds = mockSchemes.map(scheme => scheme.id);
+    setAutoAppliedSchemes(new Set(allSchemeIds));
+    
+    // Store all auto-applied schemes in localStorage
+    localStorage.setItem('auto_applied_schemes', JSON.stringify(allSchemeIds));
+    
+    // Store all scheme details for immediate access
+    const allApprovedSchemes = mockSchemes.map(scheme => ({
+      id: scheme.id,
+      name: scheme.name,
+      description: scheme.description,
+      amount: scheme.coverage / 100,
+      status: 'approved' as const,
+      approvalDate: new Date().toISOString().split('T')[0],
+      provider: 'Government Health Scheme',
+      estimatedBenefit: `$${scheme.coverage.toLocaleString()}`,
+      matchScore: scheme.matchPercentage
+    }));
+    
+    localStorage.setItem('approved_schemes', JSON.stringify(allApprovedSchemes));
+    
+    toast({
+      title: "Bulk Auto-Application Complete!",
+      description: `Successfully applied to ${allSchemeIds.length} schemes.`,
+    });
   };
 
   const getMatchColor = (percentage: number) => {
@@ -77,10 +139,10 @@ export default function AiRecommendation() {
           <Card className="glassmorphism rounded-2xl max-w-2xl mx-auto mb-8 slide-up">
             <CardContent className="p-8 text-center">
               <Search className="text-medilinkx-blue h-12 w-12 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Enter Your HealthID</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Enter Your ABHA ID</h3>
               <div className="flex gap-3">
                 <Input
-                  placeholder="Enter your HealthID"
+                  placeholder="Enter your ABHA ID"
                   value={healthIdInput}
                   onChange={(e) => setHealthIdInput(e.target.value)}
                   className="flex-1"
@@ -111,11 +173,11 @@ export default function AiRecommendation() {
                     <h4 className="font-semibold text-gray-700 mb-2">Basic Information</h4>
                     <p className="text-gray-600"><strong>Name:</strong> {patientProfile.patientName}</p>
                     <p className="text-gray-600"><strong>Age:</strong> {new Date().getFullYear() - new Date(patientProfile.dateOfBirth).getFullYear()} years</p>
-                    <p className="text-gray-600"><strong>Blood Group:</strong> {patientProfile.bloodGroup || "A+"}</p>
+                    <p className="text-gray-600"><strong>Blood Group:</strong> {patientProfile.bloodGroup}</p>
                   </div>
                   <div className="bg-white rounded-lg p-4">
                     <h4 className="font-semibold text-gray-700 mb-2">Health Status</h4>
-                    <p className="text-gray-600"><strong>Conditions:</strong> {patientProfile.medicalConditions || "Diabetes Type 2"}</p>
+                    <p className="text-gray-600"><strong>Conditions:</strong> {patientProfile.medicalConditions}</p>
                     <p className="text-gray-600"><strong>Risk Level:</strong> <span className="text-medilinkx-orange font-semibold">Medium</span></p>
                   </div>
                   <div className="bg-white rounded-lg p-4">
@@ -144,6 +206,7 @@ export default function AiRecommendation() {
                     const badgeColor = getMatchBadgeColor(scheme.matchPercentage);
                     const SchemeIcon = scheme.type === 'diabetes-care' ? Heart : 
                                      scheme.type === 'general-health' ? Shield : Users;
+                    const isApplied = autoAppliedSchemes.has(scheme.id);
 
                     return (
                       <div 
@@ -155,30 +218,90 @@ export default function AiRecommendation() {
                           <span className={`${badgeColor} text-white px-3 py-1 rounded-full text-sm font-semibold`}>
                             {scheme.matchPercentage}% Match
                           </span>
-                          <SchemeIcon className={`h-6 w-6 ${matchColor.split(' ')[0]}`} />
+                          {isApplied ? (
+                            <CheckCircle className="h-6 w-6 text-green-600" />
+                          ) : (
+                            <SchemeIcon className={`h-6 w-6 ${matchColor.split(' ')[0]}`} />
+                          )}
                         </div>
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">{scheme.name}</h4>
                         <p className="text-gray-600 mb-3 text-sm">{scheme.description}</p>
-                        <div className="space-y-2 text-sm text-gray-500">
+                        <div className="space-y-2 text-sm text-gray-500 mb-4">
                           <p>💰 Coverage: ${scheme.coverage.toLocaleString()}/year</p>
                           <p>⏱️ Processing: {scheme.processingTime}</p>
                           <p>🏥 Network: {scheme.networkHospitals}+ hospitals</p>
+                        </div>
+                        
+                        <div className="flex gap-2">
+                          {!isApplied ? (
+                            <Button
+                              size="sm"
+                              onClick={() => handleAutoApply(scheme.id, scheme.name)}
+                              className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                            >
+                              <CheckCircle className="mr-1 h-4 w-4" />
+                              Auto-Apply
+                            </Button>
+                          ) : (
+                            <Button
+                              size="sm"
+                              className="flex-1 bg-green-600 text-white"
+                              disabled
+                            >
+                              <CheckCircle className="mr-1 h-4 w-4" />
+                              Applied
+                            </Button>
+                          )}
                         </div>
                       </div>
                     );
                   })}
                 </div>
                 
-                <div className="text-center mt-8">
-                  <Link href="/schemes">
-                    <Button 
-                      className="bg-medilinkx-green hover:bg-green-700 px-8 py-3 font-semibold"
-                      data-testid="button-apply-schemes"
-                    >
-                      Apply to Recommended Schemes
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </Link>
+                <div className="text-center mt-8 space-y-4">
+                  {/* Bulk Auto-Apply Button */}
+                  {autoAppliedSchemes.size === 0 && (
+                    <div>
+                      <Button 
+                        onClick={handleAutoApplyAll}
+                        className="bg-orange-600 hover:bg-orange-700 px-8 py-3 font-semibold mr-4"
+                      >
+                        <Brain className="mr-2 h-5 w-5" />
+                        Auto-Apply to All Schemes
+                      </Button>
+                    </div>
+                  )}
+
+                  {/* Continue to Voucher System */}
+                  {autoAppliedSchemes.size > 0 && (
+                    <div>
+                      <Link href="/claim-schemes">
+                        <Button 
+                          className="bg-medilinkx-green hover:bg-green-700 px-8 py-3 font-semibold"
+                        >
+                          <Wallet className="mr-2 h-5 w-5" />
+                          Continue to Voucher Wallet ({autoAppliedSchemes.size} Applied)
+                          <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                      </Link>
+                      <p className="text-sm text-gray-600 mt-2">
+                        Convert your approved schemes to USDC vouchers for hospital payments
+                      </p>
+                    </div>
+                  )}
+
+                  {/* View All Schemes */}
+                  <div>
+                    <Link href="/schemes">
+                      <Button 
+                        variant="outline"
+                        className="px-8 py-3 font-semibold"
+                      >
+                        View All Available Schemes
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -188,3 +311,4 @@ export default function AiRecommendation() {
     </div>
   );
 }
+

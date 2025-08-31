@@ -1,251 +1,438 @@
 import { Link } from "wouter";
-import { Shield, Heart, Brain, Zap, Wallet, Eye, Lock, Globe, ShieldQuestion } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { 
+  Shield, 
+  Wallet, 
+  Bot, 
+  FileText, 
+  Download, 
+  CheckCircle, 
+  Users, 
+  TrendingUp,
+  Award,
+  Clock,
+  MapPin,
+  Phone,
+  Mail,
+  ArrowRight,
+  Star,
+  Heart,
+  Zap,
+  Globe,
+  Lock,
+  Smartphone
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="pt-16">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="gradient-bg min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-4000"></div>
-        </div>
-        <div className="relative z-10 max-w-5xl mx-auto text-center px-4 text-white">
-          <div className="fade-in">
-            <div className="floating mb-8">
-              <div className="relative inline-block">
-                <Shield className="h-28 w-28 mx-auto mb-6 text-white drop-shadow-2xl" />
-                <div className="absolute inset-0 h-28 w-28 mx-auto bg-white rounded-full blur-xl opacity-20 pulse-glow"></div>
-              </div>
+      <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="text-center">
+            <div className="flex items-center justify-center mb-6">
+              <Heart className="w-12 h-12 text-red-400 mr-3" />
+              <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+                HealthChain Pro
+              </h1>
             </div>
-            <h1 className="font-display text-6xl md:text-8xl font-black mb-8 hero-text tracking-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-green-100 bg-clip-text text-transparent">
-                MediLinkX
-              </span>
-            </h1>
-            <div className="glassmorphism-strong rounded-2xl p-6 mb-8 max-w-3xl mx-auto">
-              <p className="text-2xl md:text-3xl mb-4 font-semibold hero-text">
-                Decentralized Health Identity & Smart Benefits Platform
-              </p>
-              <p className="text-lg md:text-xl opacity-90 hero-text">
-                Secure, AI-powered healthcare management on the blockchain
-              </p>
-            </div>
-            <div className="space-y-4 md:space-y-0 md:space-x-6 md:flex md:justify-center md:items-center">
+            <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto mb-8 leading-relaxed">
+              End-to-end healthcare management: from ABHA ID verification to instant hospital payments
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/create-healthid">
-                <Button 
-                  size="lg" 
-                  className="glassmorphism-strong hover:glassmorphism border-2 border-white/30 text-white px-10 py-5 rounded-2xl text-xl font-bold hover:bg-white/20 transition-all duration-300 transform hover:scale-110 shadow-2xl backdrop-blur-sm"
-                  data-testid="create-healthid-cta"
-                >
-                  <Shield className="mr-3 h-6 w-6" />
-                  Create Your HealthID
-                </Button>
+                <button className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                  Start Workflow - Enter ABHA ID
+                  <ArrowRight className="w-5 h-5" />
+                </button>
               </Link>
-              <Link href="/about">
-                <Button 
-                  variant="ghost"
-                  size="lg" 
-                  className="border-2 border-white/50 text-white px-8 py-5 rounded-2xl text-lg font-semibold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-                >
-                  Learn More
-                </Button>
+              <Link href="#how-it-works">
+                <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center gap-2">
+                  Learn How It Works
+                  <Bot className="w-5 h-5" />
+                </button>
               </Link>
+            </div>
+          </div>
+        </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-blue-400/20 rounded-full blur-xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-400/20 rounded-full blur-lg"></div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">50K+</h3>
+              <p className="text-gray-600">Active Users</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Wallet className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">₹2.5Cr+</h3>
+              <p className="text-gray-600">Vouchers Issued</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">95%</h3>
+              <p className="text-gray-600">Success Rate</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-8 h-8 text-orange-600" />
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">24/7</h3>
+              <p className="text-gray-600">Support Available</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Info Cards Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="animated-bg absolute inset-0 opacity-5"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50/50 to-green-50/30"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20 slide-up">
-            <h2 className="font-display text-4xl md:text-6xl font-bold text-gray-800 mb-6">
-              Revolutionary Healthcare Solutions
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              How HealthChain Pro Works
             </h2>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Experience the future of healthcare with blockchain security, AI intelligence, and seamless benefit management
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our streamlined 7-step process ensures seamless healthcare access from ABHA ID verification to instant hospital payments
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* HealthID Card */}
-            <div className="feature-card rounded-2xl p-8 text-center group">
-              <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                <Heart className="text-white h-10 w-10" />
+            {/* Step 1 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-blue-600">1</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Decentralized HealthID</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Secure, blockchain-based health identity that you own and control completely
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Enter ABHA ID</h3>
+              <p className="text-gray-600 text-center mb-6">
+                Verify your Ayushman Bharat Health Account ID for secure access
               </p>
+              <div className="flex items-center justify-center text-blue-600">
+                <Shield className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">Government Verified</span>
+              </div>
             </div>
 
-            {/* AI Recommendations Card */}
-            <div className="feature-card rounded-2xl p-8 text-center group">
-              <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                <Brain className="text-white h-10 w-10" />
+            {/* Step 2 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-green-600">2</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">AI Health Insights</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Personalized scheme recommendations powered by advanced AI algorithms
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Wallet Setup</h3>
+              <p className="text-gray-600 text-center mb-6">
+                Connect your Coinbase CDP Wallet for secure crypto transactions
               </p>
+              <div className="flex items-center justify-center text-green-600">
+                <Wallet className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">Crypto Ready</span>
+              </div>
             </div>
 
-            {/* Auto-Apply Card */}
-            <div className="feature-card rounded-2xl p-8 text-center group">
-              <div className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                <Zap className="text-white h-10 w-10" />
+            {/* Step 3 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-blue-600">3</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Smart Auto-Apply</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Automatically apply to eligible health schemes with one-click automation
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">AI Recommendation</h3>
+              <p className="text-gray-600 text-center mb-6">
+                Get personalized healthcare scheme recommendations based on your profile
               </p>
+              <div className="flex items-center justify-center text-blue-600">
+                <Bot className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">AI Powered</span>
+              </div>
             </div>
 
-            {/* Secure Vouchers Card */}
-            <div className="feature-card rounded-2xl p-8 text-center group">
-              <div className="bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                <Wallet className="text-white h-10 w-10" />
+            {/* Step 4 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-orange-600">4</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Crypto Vouchers</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Secure digital vouchers stored in your crypto wallet for instant payments
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Fetch Schemes</h3>
+              <p className="text-gray-600 text-center mb-6">
+                Browse and select from government-approved healthcare schemes
               </p>
+              <div className="flex items-center justify-center text-orange-600">
+                <FileText className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">Verified Schemes</span>
+              </div>
+            </div>
+
+            {/* Step 5 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-red-600">5</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Claim & Convert</h3>
+              <p className="text-gray-600 text-center mb-6">
+                Convert approved schemes to digital vouchers in your wallet
+              </p>
+              <div className="flex items-center justify-center text-red-600">
+                <CheckCircle className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">Instant Conversion</span>
+              </div>
+            </div>
+
+            {/* Step 6 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-indigo-600">6</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Pay Hospitals</h3>
+              <p className="text-gray-600 text-center mb-6">
+                Use vouchers to make instant payments to healthcare providers
+              </p>
+              <div className="flex items-center justify-center text-indigo-600">
+                <Zap className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">Lightning Fast</span>
+              </div>
+            </div>
+
+            {/* Step 7 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-teal-600">7</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Download Receipt</h3>
+              <p className="text-gray-600 text-center mb-6">
+                Get detailed transaction receipts for your records
+              </p>
+              <div className="flex items-center justify-center text-teal-600">
+                <Download className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">Digital Receipts</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Key Features Section */}
-      <section className="py-24 relative bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23007BFF" fill-opacity="0.03"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="font-display text-4xl md:text-6xl font-bold text-gray-800 mb-6">
-              Why Choose MediLinkX?
+      {/* Features Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Why Choose HealthChain Pro?
             </h2>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-              Built with cutting-edge technology for maximum security and efficiency
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Experience the future of healthcare with our cutting-edge technology and user-centric approach
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="glassmorphism rounded-xl p-6 text-center slide-up">
-              <div className="bg-medilinkx-blue bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Eye className="text-medilinkx-blue h-8 w-8" />
+            <div className="text-center p-6">
+              <div className="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Lock className="w-10 h-10 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Complete Transparency</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank-Grade Security</h3>
               <p className="text-gray-600">
-                Every transaction is recorded on the blockchain, ensuring complete transparency and traceability
+                Your health data and transactions are protected with enterprise-level encryption and security protocols
               </p>
             </div>
 
-            <div className="glassmorphism rounded-xl p-6 text-center slide-up">
-              <div className="bg-medilinkx-red bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Lock className="text-medilinkx-red h-8 w-8" />
+            <div className="text-center p-6">
+              <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Globe className="w-10 h-10 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Fraud-Proof System</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Global Standards</h3>
               <p className="text-gray-600">
-                Blockchain technology eliminates fraud, ensuring benefits reach genuine patients only
+                Built on international healthcare standards and best practices for maximum compatibility
               </p>
             </div>
 
-            <div className="glassmorphism rounded-xl p-6 text-center slide-up">
-              <div className="bg-medilinkx-green bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Brain className="text-medilinkx-green h-8 w-8" />
+            <div className="text-center p-6">
+              <div className="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Smartphone className="w-10 h-10 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">AI-Powered Automation</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Mobile First</h3>
               <p className="text-gray-600">
-                Intelligent algorithms automatically match patients with eligible schemes
+                Optimized for mobile devices, ensuring seamless access from anywhere, anytime
               </p>
             </div>
 
-            <div className="glassmorphism rounded-xl p-6 text-center slide-up">
-              <div className="bg-medilinkx-orange bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Zap className="text-medilinkx-orange h-8 w-8" />
+            <div className="text-center p-6">
+              <div className="bg-orange-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Award className="w-10 h-10 text-orange-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Instant Payments</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Government Approved</h3>
               <p className="text-gray-600">
-                Crypto-based vouchers enable instant payments, eliminating paperwork delays
+                All schemes and processes are verified and approved by government healthcare authorities
               </p>
             </div>
 
-            <div className="glassmorphism rounded-xl p-6 text-center slide-up">
-              <div className="bg-medilinkx-blue bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Globe className="text-medilinkx-blue h-8 w-8" />
+            <div className="text-center p-6">
+              <div className="bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Zap className="w-10 h-10 text-red-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Global Accessibility</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Instant Processing</h3>
               <p className="text-gray-600">
-                Access healthcare benefits from anywhere in the world, breaking geographical barriers
+                Real-time processing ensures your healthcare needs are met without delays
               </p>
             </div>
 
-            <div className="glassmorphism rounded-xl p-6 text-center slide-up">
-              <div className="bg-medilinkx-green bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <ShieldQuestion className="text-medilinkx-green h-8 w-8" />
+            <div className="text-center p-6">
+              <div className="bg-teal-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Heart className="w-10 h-10 text-teal-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Privacy Protection</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Patient Centric</h3>
               <p className="text-gray-600">
-                Your health data remains encrypted and under your complete control
+                Designed with patients in mind, prioritizing ease of use and accessibility
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
+      {/* Technology Stack Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center mb-4">
-                <Heart className="text-medilinkx-blue h-8 w-8 mr-3" />
-                <span className="text-xl font-bold">MediLinkX</span>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Powered by Advanced Technology
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Built with cutting-edge technologies for secure, scalable, and efficient healthcare management
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="bg-blue-500 text-white w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                CDP
               </div>
-              <p className="text-gray-400">
-                Revolutionizing healthcare through blockchain technology and AI-powered solutions.
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Coinbase CDP</h3>
+              <p className="text-gray-600 text-sm">
+                Secure cryptocurrency wallet integration for instant transactions
               </p>
             </div>
+
+            <div className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="bg-green-500 text-white w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                X402
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">X402 Protocol</h3>
+              <p className="text-gray-600 text-sm">
+                Gasless transactions and advanced blockchain security
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="bg-blue-500 text-white w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                AI
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">AI Intelligence</h3>
+              <p className="text-gray-600 text-sm">
+                Smart recommendations and automated scheme matching
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="bg-orange-500 text-white w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                Web3
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Web3 Ready</h3>
+              <p className="text-gray-600 text-sm">
+                Decentralized architecture for enhanced security and transparency
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Ready to Transform Your Healthcare Experience?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Join thousands of users who have already simplified their healthcare journey with HealthChain Pro
+          </p>
+          <Link href="/create-healthid">
+            <button className="bg-white text-blue-600 px-10 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 mx-auto shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              Get Started Now
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <div className="flex items-center mb-4">
+                <Heart className="w-8 h-8 text-red-400 mr-2" />
+                <span className="text-2xl font-bold">HealthChain Pro</span>
+              </div>
+              <p className="text-gray-400 mb-4">
+                Revolutionizing healthcare access through technology and innovation
+              </p>
+              <div className="flex space-x-4">
+                <Star className="w-5 h-5 text-yellow-400" />
+                <Star className="w-5 h-5 text-yellow-400" />
+                <Star className="w-5 h-5 text-yellow-400" />
+                <Star className="w-5 h-5 text-yellow-400" />
+                <Star className="w-5 h-5 text-yellow-400" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="/create-healthid" className="text-gray-400 hover:text-white transition-colors">
-                    Create HealthID
-                  </Link>
+                <li><Link href="/create-healthid" className="text-gray-400 hover:text-white transition-colors">Enter ABHA ID</Link></li>
+                <li><Link href="/wallet-setup" className="text-gray-400 hover:text-white transition-colors">Wallet Setup</Link></li>
+                <li><Link href="/ai-recommendation" className="text-gray-400 hover:text-white transition-colors">AI Recommendation</Link></li>
+                <li><Link href="/schemes" className="text-gray-400 hover:text-white transition-colors">Schemes</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Support</h3>
+              <ul className="space-y-2">
+                <li className="flex items-center text-gray-400">
+                  <Phone className="w-4 h-4 mr-2" />
+                  <span>1800-HEALTHCHAIN</span>
                 </li>
-                <li>
-                  <Link href="/ai-recommendation" className="text-gray-400 hover:text-white transition-colors">
-                    AI Recommendations
-                  </Link>
+                <li className="flex items-center text-gray-400">
+                  <Mail className="w-4 h-4 mr-2" />
+                  <span>support@healthchainpro.com</span>
                 </li>
-                <li>
-                  <Link href="/wallet" className="text-gray-400 hover:text-white transition-colors">
-                    Wallet
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
-                    About Us
-                  </Link>
+                <li className="flex items-center text-gray-400">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  <span>24/7 Available</span>
                 </li>
               </ul>
             </div>
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Contact</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>📧 support@medilinkx.com</li>
-                <li>📞 +1 (555) 123-4567</li>
-                <li>📍 Healthcare District, Tech City</li>
+              <h3 className="text-lg font-semibold mb-4">Legal</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Data Protection</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Compliance</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 MediLinkX. All rights reserved. | Powered by Blockchain & AI Technology</p>
+
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+            <p className="text-gray-400">
+              © 2024 HealthChain Pro. All rights reserved. Built with ❤️ for better healthcare.
+            </p>
           </div>
         </div>
       </footer>

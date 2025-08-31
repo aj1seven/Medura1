@@ -52,7 +52,7 @@ export class LocalStorage {
 
   static getWalletBalance(): number {
     const stored = localStorage.getItem('walletBalance');
-    return stored ? parseFloat(stored) : 1250;
+    return stored ? parseFloat(stored) : 0; // Start with 0 instead of 1250
   }
 
   static setWalletBalance(balance: number): void {

@@ -7,11 +7,12 @@ import NotFound from "@/pages/not-found";
 import Navbar from "@/components/layout/navbar";
 import Home from "@/pages/home";
 import CreateHealthId from "@/pages/create-healthid";
+import WalletSetup from "@/pages/wallet-setup";
 import AiRecommendation from "@/pages/ai-recommendation";
 import Schemes from "@/pages/schemes";
-import Wallet from "@/pages/wallet";
+import ClaimSchemes from "@/pages/claim-schemes";
+import PayHospital from "@/pages/pay-hospital";
 import Receipt from "@/pages/receipt";
-import About from "@/pages/about";
 
 function Router() {
   return (
@@ -20,11 +21,12 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/create-healthid" component={CreateHealthId} />
+        <Route path="/wallet-setup" component={WalletSetup} />
         <Route path="/ai-recommendation" component={AiRecommendation} />
         <Route path="/schemes" component={Schemes} />
-        <Route path="/wallet" component={Wallet} />
+        <Route path="/claim-schemes" component={ClaimSchemes} />
+        <Route path="/pay-hospital" component={PayHospital} />
         <Route path="/receipt" component={Receipt} />
-        <Route path="/about" component={About} />
         <Route component={NotFound} />
       </Switch>
     </div>
