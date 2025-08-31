@@ -215,20 +215,6 @@ The application is fully responsive and optimized for:
 - Mobile phones
 - All modern browsers
 
-## 🧪 Testing
-
-```bash
-# Run frontend tests
-cd client
-npm test
-
-# Run backend tests
-cd server
-npm test
-
-# Run integration tests
-npm run test:integration
-```
 
 ## 📊 Performance Metrics
 
