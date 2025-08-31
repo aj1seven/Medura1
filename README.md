@@ -1,6 +1,5 @@
 # Medura - Healthcare Management Platform
 
-[Medura](https://img.shields.io/badge/HealthChain%20Pro-Healthcare%20Platform-blue?style=for-the-badge&logo=heart)](https://healthchainpro.com)
 
 > **Revolutionizing healthcare access through technology and innovation**
 
